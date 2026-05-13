@@ -11,7 +11,31 @@ if not api_key:
 
 genai.configure(api_key=api_key)
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+def _resolve_model_name() -> str:
+    """
+    Resolve a working Gemini model name.
+    Priority:
+    1) GEMINI_MODEL from env
+    2) First available model that supports generateContent
+    3) A conservative fallback
+    """
+    env_model = os.getenv("GEMINI_MODEL")
+    if env_model:
+        return env_model
+
+    try:
+        models = genai.list_models()
+        for m in models:
+            methods = getattr(m, "supported_generation_methods", []) or []
+            if "generateContent" in methods:
+                # Model names come as "models/<name>"
+                return m.name.replace("models/", "")
+    except Exception:
+        pass
+
+    return "gemini-1.5-flash-latest"
+
+model = genai.GenerativeModel(_resolve_model_name())
 
 def ask_ai(prompt):
     response = model.generate_content(prompt)
