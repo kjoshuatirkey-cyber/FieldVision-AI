@@ -9,55 +9,55 @@ from typing import Dict, Any
 # Sample IPL Match Data (Mock Data for Testing)
 # In a real application, this would come from a live cricket API
 SAMPLE_MATCH_DATA = {
-    "match_id": "IPL2024_001",
-    "match_name": "Mumbai Indians vs Royal Challengers Bangalore",
-    "venue": "Wankhede Stadium, Mumbai",
-    "date": "2024-05-13",
-    "toss_winner": "Mumbai Indians",
+    "match_id": "IPL2026_057",
+    "match_name": "Royal Challengers Bengaluru vs Kolkata Knight Riders",
+    "venue": "Shaheed Veer Narayan Singh International Stadium, Raipur",
+    "date": "2026-05-13",
+    "toss_winner": "Royal Challengers Bengaluru",
     "toss_decision": "bat",
     
     # Batting Team (Currently batting)
     "batting_team": {
-        "team_name": "Mumbai Indians",
-        "team_short": "MI",
-        "total_runs": 156,
-        "total_wickets": 4,
-        "overs_played": 18.3,
-        "run_rate": 8.45,
+        "team_name": "Royal Challengers Bengaluru",
+        "team_short": "RCB",
+        "total_runs": 142,
+        "total_wickets": 3,
+        "overs_played": 16.2,
+        "run_rate": 8.69,
     },
     
     # Bowling Team (Currently bowling)
     "bowling_team": {
-        "team_name": "Royal Challengers Bangalore",
-        "team_short": "RCB",
+        "team_name": "Kolkata Knight Riders",
+        "team_short": "KKR",
     },
     
     # Current Batsmen
     "current_batsman": {
-        "name": "Rohit Sharma",
-        "runs": 45,
-        "balls_faced": 32,
-        "strike_rate": 140.6,
-        "fours": 4,
-        "sixes": 1,
+        "name": "Virat Kohli",
+        "runs": 58,
+        "balls_faced": 39,
+        "strike_rate": 148.7,
+        "fours": 6,
+        "sixes": 2,
     },
     
     "non_striker": {
-        "name": "Suryakumar Yadav",
-        "runs": 38,
-        "balls_faced": 28,
-        "strike_rate": 135.7,
-        "fours": 3,
-        "sixes": 1,
+        "name": "Rajat Patidar",
+        "runs": 31,
+        "balls_faced": 22,
+        "strike_rate": 140.9,
+        "fours": 2,
+        "sixes": 2,
     },
     
     # Current Bowler
     "current_bowler": {
-        "name": "Mohammed Siraj",
-        "overs_bowled": 3.3,
-        "runs_given": 28,
-        "wickets_taken": 0,
-        "economy": 8.4,
+        "name": "Sunil Narine",
+        "overs_bowled": 3.2,
+        "runs_given": 24,
+        "wickets_taken": 1,
+        "economy": 7.2,
     },
     
     # Recent Balls
@@ -72,9 +72,9 @@ SAMPLE_MATCH_DATA = {
     
     # Match Status
     "match_status": "ongoing",
-    "overs_left": 1.3,
-    "required_run_rate": 12.5,
-    "balls_left": 8,
+    "overs_left": 3.4,
+    "required_run_rate": 9.8,
+    "balls_left": 22,
     
     # Powerplay/Fielding Info
     "powerplay_overs": 6,
@@ -85,64 +85,64 @@ SAMPLE_MATCH_DATA = {
         {
             "player": "Ishan Kishan",
             "runs_scored": 25,
-            "dismissal": "caught by Virat Kohli, bowled by Yuzuki Chahal",
-            "over": 10
+            "dismissal": "caught by Rinku Singh, bowled by Varun Chakaravarthy",
+            "over": 9
         },
         {
-            "player": "Hardik Pandya",
-            "runs_scored": 18,
-            "dismissal": "LBW, bowled by Mohammed Siraj",
-            "over": 15
+            "player": "Glenn Maxwell",
+            "runs_scored": 19,
+            "dismissal": "caught by Andre Russell, bowled by Sunil Narine",
+            "over": 14
         }
     ]
 }
 
 # Alternative Sample Match Data (Different Scenario)
 SAMPLE_MATCH_DATA_2 = {
-    "match_id": "IPL2024_002",
-    "match_name": "Delhi Capitals vs Kolkata Knight Riders",
-    "venue": "Arun Jaitley Stadium, Delhi",
-    "date": "2024-05-14",
+    "match_id": "IPL2026_058",
+    "match_name": "Punjab Kings vs Chennai Super Kings",
+    "venue": "HPCA Stadium, Dharamshala",
+    "date": "2026-05-14",
     
     "batting_team": {
-        "team_name": "Delhi Capitals",
-        "team_short": "DC",
-        "total_runs": 89,
-        "total_wickets": 5,
-        "overs_played": 12.2,
-        "run_rate": 7.25,
+        "team_name": "Punjab Kings",
+        "team_short": "PBKS",
+        "total_runs": 0,
+        "total_wickets": 0,
+        "overs_played": 0.0,
+        "run_rate": 0.0,
     },
     
     "bowling_team": {
-        "team_name": "Kolkata Knight Riders",
-        "team_short": "KKR",
+        "team_name": "Chennai Super Kings",
+        "team_short": "CSK",
     },
     
     "current_batsman": {
-        "name": "Rishabh Pant",
-        "runs": 22,
-        "balls_faced": 18,
-        "strike_rate": 122.2,
+        "name": "Prabhsimran Singh",
+        "runs": 0,
+        "balls_faced": 0,
+        "strike_rate": 0.0,
     },
     
     "non_striker": {
-        "name": "Axar Patel",
-        "runs": 8,
-        "balls_faced": 15,
-        "strike_rate": 53.3,
+        "name": "Shashank Singh",
+        "runs": 0,
+        "balls_faced": 0,
+        "strike_rate": 0.0,
     },
     
     "current_bowler": {
-        "name": "Varun Chakaravarthy",
-        "overs_bowled": 2.2,
-        "runs_given": 15,
-        "wickets_taken": 1,
-        "economy": 6.43,
+        "name": "Matheesha Pathirana",
+        "overs_bowled": 0.0,
+        "runs_given": 0,
+        "wickets_taken": 0,
+        "economy": 0.0,
     },
     
-    "match_status": "ongoing",
-    "overs_left": 7.4,
-    "required_run_rate": 14.8,
+    "match_status": "upcoming",
+    "overs_left": 20.0,
+    "required_run_rate": 0.0,
 }
 
 
@@ -161,7 +161,7 @@ def get_mock_match_data(match_id: str = "IPL2024_001") -> Dict[str, Any]:
         >>> print(data["batting_team"]["team_name"])
         "Mumbai Indians"
     """
-    if match_id == "IPL2024_002":
+    if match_id in {"IPL2026_058", "IPL2024_002"}:
         return SAMPLE_MATCH_DATA_2
     return SAMPLE_MATCH_DATA
 
@@ -196,8 +196,9 @@ def fetch_live_match_data(match_id: str = None) -> Dict[str, Any]:
         # response.raise_for_status()
         # return response.json()
         
-        # For now, return mock data
-        return get_mock_match_data(match_id)
+        from cricket_data import get_match_detail
+
+        return get_match_detail(match_id)
         
     except requests.exceptions.RequestException as e:
         raise Exception(f"Failed to fetch match data: {str(e)}")

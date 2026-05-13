@@ -3,9 +3,12 @@ FieldVision AI Backend Server
 Main FastAPI application entry point
 """
 
+import os
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from ai import get_ai_response, ask_ai
+from ai import get_ai_response, ask_ai, get_ai_status
+from cricket_data import list_matches, platform_summary
 from utils import fetch_live_match_data, validate_match_data, get_match_summary
 from agents.bowling_agent import get_bowling_analysis
 from agents.batting_agent import get_batting_analysis
@@ -19,11 +22,25 @@ app = FastAPI(
     version="1.0.0"
 )
 
+
+def _get_allowed_origins() -> list[str]:
+    configured = os.getenv("ALLOWED_ORIGINS") or os.getenv("FRONTEND_URL")
+    if configured:
+        return [origin.strip() for origin in configured.split(",") if origin.strip()]
+
+    return [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
+
+allowed_origins = _get_allowed_origins()
+
 # Configure CORS (Cross-Origin Resource Sharing) to allow frontend requests
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace "*" with your frontend URL
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials="*" not in allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -352,9 +369,37 @@ def get_match_commentary_analysis(match_id: str = "IPL2024_001"):
 @app.get("/health")
 def health_check():
     """Check if the server is healthy"""
-    return {"status": "healthy", "service": "FieldVision AI Backend"}
+    return {
+        "status": "healthy",
+        "service": "FieldVision AI Backend",
+        "ai": get_ai_status(),
+    }
+
+
+@app.get("/platform/summary")
+def get_platform_summary():
+    """Get platform-level match counts and featured matches."""
+    return platform_summary()
+
+
+@app.get("/matches")
+def get_matches(type: str = "all"):
+    """List live, upcoming, past, or all matches."""
+    allowed = {"all", "live", "upcoming", "past"}
+    if type not in allowed:
+        raise HTTPException(status_code=400, detail=f"type must be one of: {', '.join(sorted(allowed))}")
+
+    return {
+        "status": "success",
+        "type": type,
+        **list_matches(type),  # type: ignore[arg-type]
+    }
 
 if __name__ == "__main__":
     import uvicorn
     # This allows running: python main.py
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(
+        app,
+        host=os.getenv("HOST", "127.0.0.1"),
+        port=int(os.getenv("PORT", "8000")),
+    )

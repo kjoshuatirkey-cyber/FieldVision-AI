@@ -18,7 +18,7 @@ def analyze_batsman_weakness(match_data: Dict[str, Any]) -> str:
         AI analysis of batsman weakness
     """
     batsman = match_data["current_batsman"]
-    recent_balls = match_data["recent_balls"]
+    recent_balls = match_data.get("recent_balls", [])
     
     # Create a prompt for Gemini to analyze
     prompt = f"""
